@@ -1,7 +1,7 @@
 //"Da lool gun" by Yarg.
 //Fires chairs. My first SWEP.
 //Workshop page: http://steamcommunity.com/sharedfiles/filedetails/?id=158673321
-//This is version 1.1.0, July 10, 2013
+//This is version 1.1.1, July 10, 2013
 
 //Code under the GNU GPL License V3- http://www.gnu.org/licenses/gpl.html
 //Written by Yarg with help from a tutorial. My profile: http://steamcommunity.com/id/AppleHoller/
@@ -131,7 +131,7 @@ end
 function SWEP:PrimaryAttack()
 	//Call the throw attack function, with the office chair model
 	self:throw_attack("models/props/cs_office/Chair_office.mdl")
-	self.Weapon:SetNextPrimaryFire( CurTime() + 0.5 )	
+	self.Weapon:SetNextPrimaryFire( CurTime() + 0.33 )
 end
 
 //Throw a wooden chair on secondary attack
