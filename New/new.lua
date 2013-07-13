@@ -1,8 +1,8 @@
 //It's Yarg, making crude Gmod addons
-//This is version 0.0.0-July 12, 2013
+//This is version 0.1.0-July 12, 2013
 //Code will be pushed to my Github-https://github.com/will1982/Gmod_Addons
 //Based off my Lool gun, which was based off a tutorial
-//Copyright (C) Yarg/Will1982 2013. All rights reserved
+//Copyright (C) Yarg/Will1982 2013. Under the GNU GPL V3
 //Badly commented.
 
 //Swep vars
@@ -60,73 +60,69 @@ end
 function SWEP:Think()
 end
 
-function SWEP:throw_attack (model_file)
-local tr = self.Owner:GetEyeTrace()
-
-self:EmitSound(ShootSound)
-self.BaseClass.ShootEffects(self)
-
-if (!SERVER) then return end
-
-ent:SetPos(self.Owner:EyePos() + (self.Owner:GetAimVector() * 16))
-ent:SetAngles(self.Owner:EyeAngles())
-ent:Spawn()
-
-local phys = ent:GetPhysicsObject()
-
-if !(phys && IsValid(phys)) then ent:Remove() return end
-
-phys:ApplyForceCenter(self.Owner:GetAimVector():GetNormalized() * math.pow(tr.HitPos:Length(), 3))
-
-cleanup.Add(self.Owner, "props", ent)
-
-undo.Create ("Thrown_SWEP_Entity")
-undo.AddEntity (ent)
-undo.SetPlayer (self.Owner)
-undo.Finish()
-end
-
-function SWEP:PrimaryAttack()
 function SWEP:ShootBullet( damage, num_bullets, aimcone )
- 
+
 	local bullet = {}
 	bullet.Num 		= num_bullets
 	bullet.Src 		= self.Owner:GetShootPos()	// Source
 	bullet.Dir 		= self.Owner:GetAimVector()	// Dir of bullet
 	bullet.Spread 	= Vector( aimcone, aimcone, 0 )		// Aim Cone
-	bullet.Tracer	= 5	// Show a tracer on every x bullets 
+	bullet.Tracer	= 5	// Show a tracer on every x bullets
         bullet.TracerName = "Tracer" // what Tracer Effect should be used
-	bullet.Force	= 3	// Amount of force to give to phys objects
+	bullet.Force	= 1	// Amount of force to give to phys objects
 	bullet.Damage	= damage
 	bullet.AmmoType = "Pistol"
- 
+
 	self.Owner:FireBullets( bullet )
- 
+
 	self:ShootEffects()
- 
+
 end
+
+
+function SWEP:throw_attack (model_file)
+	local tr = self.Owner:GetEyeTrace()
+
+	self:EmitSound(ShootSound)
+	self.BaseClass.ShootEffects(self)
+
+	//We now exit if this function is not running serverside
+	if (!SERVER) then return end
+
+	//The next task is to create a physics prop based on the supplied model
+	local ent = ents.Create("prop_physics")
+	ent:SetModel(model_file)
+
+	//Set the initial position and angles of the object. This might need some fine tuning;
+	//but it seems to work for the models I have tried.
+	ent:SetPos(self.Owner:EyePos() + (self.Owner:GetAimVector() * 16))
+	ent:SetAngles(self.Owner:EyeAngles())
+	ent:Spawn()
+
+	//Now we need to get the physics object for our entity so we can apply a force to it
+	local phys = ent:GetPhysicsObject()
+
+	//Check if the physics object is valid. If not, remove the entity and stop the function
+	if !(phys && IsValid(phys)) then ent:Remove() return end
+
+	//Time to apply the force. My method for doing this was almost entirely empirical
+	//and it seems to work fairly intuitively with chairs.
+	phys:ApplyForceCenter(self.Owner:GetAimVector():GetNormalized() *  math.pow(tr.HitPos:Length(), 3))
+
+	//Now for the important part of adding the spawned objects to the undo and cleanup lists.
+	cleanup.Add(self.Owner, "props", ent)
+
+	undo.Create ("Thrown_SWEP_Entity")
+		undo.AddEntity (ent)
+		undo.SetPlayer (self.Owner)
+	undo.Finish()
+end
+
+
+function SWEP:PrimaryAttack()
+	self:ShootBullet()
 end
 
 function SWEP:SecondaryAttack()
- 
-	if ( !self:CanPrimaryAttack() ) then return end
- 
-	local eyetrace = self.Owner:GetEyeTrace();
-	
-	self:EmitSound ( self.Shootsound )
- 
-	self.BaseClass.ShootEffects (self);
- 
-	local explode = ents.Create( "env_explosion" )
-	explode:SetPos( eyetrace.HitPos )
-	explode:SetOwner( self.Owner ) -- this sets you as the person who made the explosion
-	explode:Spawn() --this actually spawns the explosion
-	explode:SetKeyValue( "iMagnitude", "220" ) -- the magnitude
-	explode:Fire( "Explode", 0, 0 )
-	explode:EmitSound( "weapon_AWP.Single", 400, 400 ) -- the sound for the explosion, and how far away it can be heard
- 
-	self:SetNextPrimaryFire( CurTime() + 0.15 )
-	self:SetNextSecondaryFire( CurTime() + 0.20 )
- 
+	self:throw_attack("models/props_c17/FurnitureChair001a.mdl")
 end
-
