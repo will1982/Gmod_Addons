@@ -1,5 +1,5 @@
 //It's Yarg, making crude Gmod addons
-//This is version 0.1.0-July 12, 2013
+//This is version 0.9.0-July 15, 2013
 //Code will be pushed to my Github-https://github.com/will1982/Gmod_Addons
 //Based off my Lool gun, which was based off a tutorial
 //Copyright (C) Yarg/Will1982 2013. Under the GNU GPL V3
@@ -17,7 +17,11 @@ SWEP.AutoSwitchFrom = false
 
 elseif CLIENT then
 
-SWEP.Printname = "New melon launcher"
+SWEP.Printname = "OP Pistol"
+SWEP.Author = "Yarg"
+SWEP.Contact = "yarg@willsappleholler.com"
+SWEP.Purpose = "Kill stuff fast"
+SWEP.Instructions = "Yey"
 
 SWEP.Slot = 3
 SWEP.Slotpos = 2
@@ -27,11 +31,6 @@ SWEP.Drawcrosshair = true
 
 language.Add("Undone_Thrown_SWEP_Entity","Undone Thrown SWEP Entity")
 end
-
-SWEP.Author = "Yarg"
-SWEP.Contact = "yarg@willsappleholler.com"
-SWEP.Purpose = "Indev"
-SWEP.Instructions = "Indev"
 
 SWEP.Category = "Yarg's Sweps"
 
@@ -60,7 +59,7 @@ end
 function SWEP:Think()
 end
 
-function SWEP:ShootBullet( damage, num_bullets, aimcone )
+function SWEP:ShootBullet( 9000, num_bullets, aimcone )
 
 	local bullet = {}
 	bullet.Num 		= num_bullets
@@ -70,7 +69,7 @@ function SWEP:ShootBullet( damage, num_bullets, aimcone )
 	bullet.Tracer	= 5	// Show a tracer on every x bullets
         bullet.TracerName = "Tracer" // what Tracer Effect should be used
 	bullet.Force	= 1	// Amount of force to give to phys objects
-	bullet.Damage	= damage
+	bullet.Damage	= 9000
 	bullet.AmmoType = "Pistol"
 
 	self.Owner:FireBullets( bullet )
@@ -121,6 +120,7 @@ end
 
 function SWEP:PrimaryAttack()
 	self:ShootBullet()
+	self.Weapon:SetNextPrimaryFire( CurTime() + 0.212482389534 )
 end
 
 function SWEP:SecondaryAttack()
