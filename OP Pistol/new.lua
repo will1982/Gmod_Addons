@@ -1,5 +1,5 @@
 //It's Yarg, making crude Gmod addons
-//This is version 0.9.0-July 15, 2013
+//This is version 1.9.1 July 16, 2013
 //Code will be pushed to my Github-https://github.com/will1982/Gmod_Addons
 //Based off my Lool gun, which was based off a tutorial
 //Copyright (C) Yarg/Will1982 2013. Under the GNU GPL V3
