@@ -1,17 +1,19 @@
 //It's Yarg, making crude Gmod addons
-//This is version 1.9.1 July 16, 2013
+//This is version 1.9.2 October 4, 2014
 //Code will be pushed to my Github-https://github.com/will1982/Gmod_Addons
 //Based off my Lool gun, which was based off a tutorial
-//Copyright (C) Yarg/Will1982 2013. Under the GNU GPL V3
+//PRev version-1.9.1, July 13, 2013
+//Copyright (C) Yarg/Will1982 2014. Under the ISC License
 //Badly commented.
+//10/4/2014-Trying to comment more
 
-//Swep vars
+//Swep vars, for the server/Local server only.
 if SERVER then
-
+//Create the SWEP file in the Gmod workspace.
 AddCSLuaFile ("new.lua")
 
 SWEP.Weight = 7
-
+//Switches you to the swep when you spawn it
 SWEP.AutoSwitchTo = true
 SWEP.AutoSwitchFrom = false
 
@@ -19,7 +21,7 @@ elseif CLIENT then
 
 SWEP.Printname = "OP Pistol"
 SWEP.Author = "Yarg"
-SWEP.Contact = "yarg@willsappleholler.com"
+SWEP.Contact = "wschlitz@gmail.com"
 SWEP.Purpose = "Kill stuff fast"
 SWEP.Instructions = "Yey"
 
@@ -36,10 +38,10 @@ SWEP.Category = "Yarg's Sweps"
 
 SWEP.Spawnable = true
 SWEP.AdminSpawnable = true
-
+//You need CSS for these
 SWEP.ViewModel = "models/weapons/v_Pistol.mdl" --1st person
 SWEP.WorldModel = "	models/weapons/w_smg1.mdl " --Everyone else
-
+//Unlimited ammo
 SWEP.Primary.Clipsize = -1
 SWEP.Primary.DefaultClip = -1
 
