@@ -1,10 +1,10 @@
 
-Copyright (c) 2013, Yarg <yarg@willsappleholler.com>
+Copyright (c) 2019, William Schlitz (wschlitz@gmail.com)
 
 Permission to use, copy, modify, and/or distribute this software for any purpose with
 or without fee is hereby granted, provided that the above copyright notice and this permission
 notice appear in all copies. In addition, deriviative works MUST attribute the author with the following format:
-"Based on Gmod Addons by Yarg, <yarg@willsappleholler.com>"
+"Based on Gmod Addons by William Schlitz (wschlitz@gmail.com)"
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD
 TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS.
