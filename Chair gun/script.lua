@@ -3,7 +3,7 @@
 //Workshop page: http://steamcommunity.com/sharedfiles/filedetails/?id=158673321
 //This is version 1.1.1, July 10, 2013
 
-//Code under a custom ICS license- see the LICENSE file included with this software or visit https://galactose.neocities.org/license.html
+//Code under a custom ISC license- see the LICENSE file included with this software or visit https://galactose.neocities.org/license.html
 //Written by Yarg with help from a tutorial. My profile: http://steamcommunity.com/id/AppleHoller/
 
 //Swep variables
