@@ -3,7 +3,8 @@
 //Code will be pushed to my Github-https://github.com/will1982/Gmod_Addons
 //Based off my Lool gun, which was based off a tutorial
 //PRev version-1.9.1, July 13, 2013
-//Copyright (C) Yarg/Will1982 2014. Under the ISC License
+//Copyright (C) Yarg/Will1982 2014. 
+//Code under a custom ISC license- see the LICENSE file included with this software or visit https://galactose.neocities.org/license.html
 //Badly commented.
 //10/4/2014-Trying to comment more
 
